@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - node
+
+dist: bionic
+sudo: required
+
+notifications:
+  email:
+    recipients:
+      - liankai.ng@ncs.com.sg
+    on_success: always
+    on_failure: always
+branches:
+  only:
+   - development
+before_script:
+  - npm install -g @angular/cli
+  
+script:
+  - ng build --prod --base-href https://lkng95.github.io/bitcoin-order-app/
+  
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: b496eef2dbb1c2dba9d231553815b0017dbbc6a5
+  local_dir: dist/bitcoin
+  edge: true
+  on:
+    branch: development
